@@ -8,6 +8,8 @@ const Pins = ({ user }) => {
 
     const [searchTerm, setSearchTerm] = useState('')
 
+    console.log(searchTerm + " from pin.jsx")
+
     return (
         <div className='px-2 md:px-5'>
             <div className='bg-gray-50'>

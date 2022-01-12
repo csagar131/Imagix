@@ -37,7 +37,10 @@ const Feed = () => {
         }
     }, [categoryId])   // here useEffect act as componentDidMount and componentDidUpdate
 
-    // if data is not yet to fetch from backend then show loading spinner
+    // if data is not yet to fetch from backend then show loading 
+    // putting it here and not insise return because state state changes is asynchronous so previously loaded data may show whlile loading
+    // from google "setState() is asynchronous. React does not guarantee that the state changes are applied immediately. setState() does not always immediately update the component."
+    
     if(loading){
         return <Spinner message="we are adding new ideas to your feed" />
     }
@@ -45,7 +48,9 @@ const Feed = () => {
 
     return (
         <div>
-            {pins && <MasonryLayout pins={pins}/>}
+            <div>
+                {pins && <MasonryLayout pins={pins}/>}
+            </div>
         </div>
     )
 }

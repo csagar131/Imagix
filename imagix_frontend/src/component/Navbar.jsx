@@ -10,7 +10,7 @@ const Navbar = ({searchTerm, setSearchTerm, user}) => {
 
     if(!user) return null;  // check if user doesnt exist dont provide navbar
 
-
+    
 
     return (
         <div className='flex gap-2 md:gap-5 w-full mt-5'>
