@@ -1,20 +1,16 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
-import { IoIoArrowForward } from "react-icons/io";
-import logo from "../assets/logo.png";
+//import { IoIoArrowForward } from "react-icons/io";
+import logo from "../assets/logo.PNG";
+import { categories } from "../utils/data";
 
 const isNotActiveStyle =
   "flex items-center px-5 gap-4 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize";
 const isActiveStyle =
   "flex items-center px-5 gap-4  font-extrabold border-r-2 border-black  transition-all duration-200 ease-in-out capitalize";
 
-const categories = [
-  { name: "Animals" },
-  { name: "Coding" },
-  { name: "Gaming" },
-  { name: "Pixels" },
-];
+
 
 const Sidebar = ({ user, closeToggle }) => {
   const handleCloseSidebar = () => {
@@ -25,7 +21,7 @@ const Sidebar = ({ user, closeToggle }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between bg-white h-full  min-w-210 hide-scrollbar">
+    <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
       <div className="flex flex-col">
         <Link
           to="/"
@@ -47,7 +43,7 @@ const Sidebar = ({ user, closeToggle }) => {
           </NavLink>
           <h3 className="mt-2 px-5  text-base 2xl:text-xl">
             {" "}
-            Display Categories
+            Categories
           </h3>
           {categories.slice(0, categories.length - 1).map((category) => (
             <NavLink
@@ -58,6 +54,7 @@ const Sidebar = ({ user, closeToggle }) => {
               onClick={handleCloseSidebar}
               key={category.name}
             >
+              <img src={category.image} alt="category-img" className="w-5 h-5 rounded-full"/>
               {category.name}
             </NavLink>
           ))}

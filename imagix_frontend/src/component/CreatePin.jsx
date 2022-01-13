@@ -12,23 +12,27 @@ const CreatePin = ({ user }) => {
   const [about, setAbout] = useState('');
   const [loading, setLoading] = useState(false);
   const [destination, setDestination] = useState('');
-  const [fields, setFields] = useState(null);
+  const [fields, setFields] = useState(false);
   const [category, setCategory] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(false);
 
   const navigate = useNavigate();
 
+
   const uploadImage = (e) => {
+    
     const selectedFile = e.target.files[0];
     // uploading asset to sanity
+
+    // check the image type
     if (selectedFile.type === 'image/png' || selectedFile.type === 'image/svg' || selectedFile.type === 'image/jpeg' || selectedFile.type === 'image/gif' || selectedFile.type === 'image/tiff') {
       setWrongImageType(false);
       setLoading(true);
       client.assets
         .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
         .then((document) => {
-          setImageAsset(document);
+          setImageAsset(document);  // set the ImageAsset state to document returned by sanity client
           setLoading(false);
         })
         .catch((error) => {
@@ -42,6 +46,8 @@ const CreatePin = ({ user }) => {
 
   const savePin = () => {
     if (title && about && destination && imageAsset?._id && category) {
+
+      // form a document to upload to sanity client
       const doc = {
         _type: 'pin',
         title,
@@ -65,8 +71,12 @@ const CreatePin = ({ user }) => {
         navigate('/');
       });
     } else {
-      setFields(true);
+      // if all the fields are not provided set setFields(kind of error) to true
+      // component will re-render as  state is changing
 
+      setFields(true);  
+
+      // after 2 seconds remove the error to let the user fill it
       setTimeout(
         () => {
           setFields(false);
@@ -116,7 +126,7 @@ const CreatePin = ({ user }) => {
             ) : (
               <div className="relative h-full">
                 <img
-                  src={imageAsset?.url}
+                  src={imageAsset?.url}  // from ImageAsset state check the uploaded image url
                   alt="uploaded-pic"
                   className="h-full w-full"
                 />
@@ -176,7 +186,7 @@ const CreatePin = ({ user }) => {
               >
                 <option value="others" className="sm:text-bg bg-white">Select Category</option>
                 {categories.map((item) => (
-                  <option className="text-base border-0 outline-none capitalize bg-white text-black " value={item.name}>
+                  <option key={item.image} className="text-base border-0 outline-none capitalize bg-white text-black " value={item.name}>
                     {item.name}
                   </option>
                 ))}
