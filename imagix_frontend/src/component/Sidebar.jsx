@@ -21,6 +21,7 @@ const Sidebar = ({ user, closeToggle }) => {
   };
 
   return (
+    // todo: use redux
     <div className="flex flex-col justify-between bg-white h-full overflow-y-scroll min-w-210 hide-scrollbar">
       <div className="flex flex-col">
         <Link
@@ -62,6 +63,7 @@ const Sidebar = ({ user, closeToggle }) => {
       </div>
       {user && (
         <Link to={`user-profile/${user._id}`} 
+        // use redux
         className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg mx-3"
         onClick={handleCloseSidebar}
         >

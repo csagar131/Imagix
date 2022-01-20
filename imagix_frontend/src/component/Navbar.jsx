@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate  } from 'react-router-dom'
-import {IoIosAdd, IoMdAdd , IoMdSearch} from 'react-icons/io'
+import {IoIosAdd, IoMdSearch} from 'react-icons/io'
 
 
 
@@ -13,8 +13,8 @@ const Navbar = ({searchTerm, setSearchTerm, user}) => {
     
 
     return (
-        <div className='flex gap-2 md:gap-5 w-full mt-5'>
-            <div className='flex justify-start items-center w-full px-2 rounded-md bg-white border-none outline-none focus-within:shadow-sm'>
+        <div className='flex gap-2 md:gap-5 w-full mt-5 '>
+            <div className='flex justify-start items-center w-full px-2 rounded-md bg-white border outline-none focus-within:shadow-sm'>
                     <IoMdSearch fontSize={21} className='ml-1'/>
                     <input 
                         type='text'
